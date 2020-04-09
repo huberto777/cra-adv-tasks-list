@@ -2,7 +2,7 @@
   "tasks": [
     {
       "id": 1,
-      "date": "2019-10-03",
+      "date": "2020-02-03",
       "done": false,
       "finishDate": null,
       "name": "nauczyć się js es 6",
@@ -10,7 +10,7 @@
     },
     {
       "id": 2,
-      "date": "2019-10-04",
+      "date": "2020-02-04",
       "done": false,
       "finishDate": null,
       "name": "nauczyć się biblioteki axios",
@@ -18,11 +18,19 @@
     },
     {
       "id": 3,
-      "date": "2019-12-03",
+      "date": "2020-03-03",
       "done": false,
       "finishDate": null,
       "name": "zainstalować linuxa",
       "priority": false
+    },
+    {
+      "id": 4,
+      "name": "zrobić api w laravelu",
+      "priority": false,
+      "date": "2020-04-09",
+      "done": false,
+      "finishDate": null
     }
   ]
 }

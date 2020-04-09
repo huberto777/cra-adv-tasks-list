@@ -32,19 +32,20 @@ class App extends Component {
       }))
     );
   };
-  handleDoneTask = (id) => {
-    FetchTasksAPI.partiallyReplaceTask(id).then(() =>
+  handleDoneTask = ({ id, done, finishDate }) => {
+    FetchTasksAPI.finishTask(id).then(() =>
       this.setState((prevState) => ({
         tasks: prevState.tasks.map((task) => {
           if (task.id === id) {
-            task.done = !task.done;
-            task.finishDate = new Date().toISOString().slice(0, 10);
+            done = !done;
+            finishDate = done ? new Date().toISOString().slice(0, 10) : null;
           }
           return task;
         }),
       }))
     );
   };
+
   addTask = (createdTask) => {
     FetchTasksAPI.addTask(createdTask).then(() =>
       this.setState((prevState) => ({

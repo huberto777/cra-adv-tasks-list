@@ -22,7 +22,7 @@ const TaskTable = (props) => {
             index={index}
             task={task}
             onDelete={() => props.delete(task.id)}
-            onDone={() => props.done(task.id)}
+            onDone={() => props.done(task)}
             onEdit={() => props.edit(task)}
           />
         ))}
