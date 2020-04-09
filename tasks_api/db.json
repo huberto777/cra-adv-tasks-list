@@ -1,0 +1,28 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "date": "2019-10-03",
+      "done": false,
+      "finishDate": null,
+      "name": "nauczyć się js es 6",
+      "priority": false
+    },
+    {
+      "id": 2,
+      "date": "2019-10-04",
+      "done": false,
+      "finishDate": null,
+      "name": "nauczyć się biblioteki axios",
+      "priority": true
+    },
+    {
+      "id": 3,
+      "date": "2019-12-03",
+      "done": false,
+      "finishDate": null,
+      "name": "zainstalować linuxa",
+      "priority": false
+    }
+  ]
+}
