@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class EditTask extends Component {
   state = {
-    name: this.props.name,
+    name: this.props.task.name,
   };
   handleInput = (e) => {
     if (e.target.type === "text") {
@@ -18,8 +18,8 @@ class EditTask extends Component {
   };
   handleUpdate = () => {
     const { name } = this.state;
-    const { id, priority, date, done, finishDate, update } = this.props;
-    update(id, { id, date, done, finishDate, name, priority });
+    const { task, onUpdate } = this.props;
+    onUpdate({ ...task, name });
   };
   render() {
     const { name } = this.state;
@@ -46,7 +46,7 @@ class EditTask extends Component {
           <div className="form-group col-md-2">
             <button
               className="btn btn-block btn-outline-danger"
-              onClick={this.props.edit}
+              onClick={this.props.cancel}
             >
               cancel
             </button>

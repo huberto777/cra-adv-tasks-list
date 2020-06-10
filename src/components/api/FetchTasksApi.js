@@ -13,30 +13,28 @@ const FetchTasksAPI = {
     const addedTask = await response.json();
     return addedTask;
   },
-  replaceTask: async function (id) {
-    if (!id) {
-      throw new Error("task has to have an id to be updated");
-    }
-
-    const response = await makeRequest(
-      `${BASE_URL}/${id}`,
-      "PUT",
-      // taskToReplace
-    );
-    const replacedTimebox = await response.json();
-    return replacedTimebox;
-  },
-  finishTask: async function (taskToReplace) {
+  replaceTask: async function (taskToReplace) {
     if (!taskToReplace.id) {
       throw new Error("task has to have an id to be updated");
     }
 
     const response = await makeRequest(
       `${BASE_URL}/${taskToReplace.id}`,
-      "PATCH",
-      taskToReplace.done,
-      taskToReplace.finishDate
+      "PUT",
+      taskToReplace
     );
+    const replacedTimebox = await response.json();
+    return replacedTimebox;
+  },
+  finishTask: async function (id) {
+    if (!id) {
+      throw new Error("task has to have an id to be updated");
+    }
+
+    const response = await makeRequest(`${BASE_URL}/${id}`, "PATCH", {
+      done: true,
+      finishDate: new Date().toISOString().slice(0, 10),
+    });
     const replacedTimebox = await response.json();
     return replacedTimebox;
   },

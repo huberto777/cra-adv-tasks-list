@@ -10,3 +10,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.App {
+  margin: 0 auto;
+  text-align: center;
+}
+
+
+/* utility class */
+.inactive {
+  filter: blur(2px) grayscale(1);
+}

@@ -1,8 +1,8 @@
 import React from "react";
 
-const TaskTableRow = props => {
+const TaskTableRow = (props) => {
   const { name, done, finishDate, priority, date } = props.task;
-  
+
   let style = {};
   if (done) {
     style.textDecoration = "line-through";
@@ -19,16 +19,18 @@ const TaskTableRow = props => {
       <td>{finishDate}</td>
       <td>
         <button
-          className="btn btn-sm btn-outline-primary"
+          className={done ? "inactive" : "btn btn-sm btn-outline-primary"}
           onClick={props.onDone}
+          disabled={done}
         >
           finish
         </button>
       </td>
       <td>
         <button
-          className="btn btn-sm btn-outline-secondary"
+          className={done ? "inactive" : "btn btn-sm btn-outline-secondary"}
           onClick={props.onEdit}
+          disabled={done}
         >
           edit
         </button>

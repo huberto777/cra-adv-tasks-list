@@ -21,9 +21,9 @@ const TaskTable = (props) => {
             key={task.id}
             index={index}
             task={task}
-            onDelete={() => props.delete(task.id)}
-            onDone={() => props.done(task)}
-            onEdit={() => props.edit(task)}
+            onDelete={() => props.onDelete(task)}
+            onDone={() => props.onDone(task)}
+            onEdit={() => props.onEdit(task)}
           />
         ))}
       </tbody>
