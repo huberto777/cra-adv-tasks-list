@@ -2,7 +2,7 @@ import React from 'react';
 
 const SearchTask = (props) => {
   return (
-    <div className="form-group  col-md-4">
+    <div className="form-group col-md-4">
       <input
         type="text"
         placeholder="search task"

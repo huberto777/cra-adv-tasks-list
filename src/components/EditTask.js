@@ -50,8 +50,8 @@ const EditTask = ({ task, onUpdate, onCancel }) => {
             cancel
           </button>
         </div>
-        {formik.errors.name ? <div className="text text-danger">{formik.errors.name}</div> : null}
       </div>
+      {formik.errors.name ? <div className="text text-danger">{formik.errors.name}</div> : null}
     </div>
   );
 };

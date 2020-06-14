@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
+
 import React from 'react';
 import { useFormik } from 'formik';
 import SearchTask from './SearchTask';
@@ -69,8 +70,8 @@ const AddTask = ({ addTask, search }) => {
           </button>
         </div>
         <SearchTask search={search} />
+        {formik.errors.name ? <div className="text text-danger">{formik.errors.name}</div> : null}
       </div>
-      {formik.errors.name ? <div className="text text-danger">{formik.errors.name}</div> : null}
     </div>
   );
 };
