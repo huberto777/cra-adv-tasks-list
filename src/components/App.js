@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import AddTask from "./AddTask";
-import TaskTable from "./TaskTable";
-import EditTask from "./EditTask";
-import FetchTasksAPI from "./api/FetchTasksApi";
-import "bootstrap/dist/css/bootstrap.min.css";
+import React, { Component } from 'react';
+import AddTask from './AddTask';
+import TaskTable from './TaskTable';
+import EditTask from './EditTask';
+import FetchTasksAPI from './api/FetchTasksApi';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       tasks: [],
-      search: "",
+      search: '',
       edit: false,
       loading: true,
       error: null,
@@ -28,7 +28,7 @@ class App extends Component {
     FetchTasksAPI.removeTask(id).then(() =>
       this.setState((prevState) => ({
         tasks: prevState.tasks.filter((task) => task.id !== id),
-      }))
+      })),
     );
   };
 
@@ -36,7 +36,7 @@ class App extends Component {
     FetchTasksAPI.addTask(createdTask).then(() =>
       this.setState((prevState) => ({
         tasks: [...prevState.tasks, createdTask],
-      }))
+      })),
     );
   };
   handleSearch = (e) => {
@@ -58,42 +58,34 @@ class App extends Component {
   handleUpdateTask = (updatedTask) => {
     FetchTasksAPI.replaceTask(updatedTask).then(() =>
       this.setState((prevState) => ({
-        tasks: prevState.tasks.map((task) =>
-          task.id === updatedTask.id ? updatedTask : task
-        ),
+        tasks: prevState.tasks.map((task) => (task.id === updatedTask.id ? updatedTask : task)),
         edit: false,
-      }))
+      })),
     );
   };
-  handleDoneTask = ({id}) => {
+  handleDoneTask = ({ id }) => {
     FetchTasksAPI.finishTask(id).then(() =>
       this.setState((prevState) => ({
         tasks: prevState.tasks.map((task) => {
           if (task.id === id) {
             task.done = !task.done;
-            task.finishDate = task.done
-              ? new Date().toISOString().slice(0, 10)
-              : null;
+            task.finishDate = task.done ? new Date().toISOString().slice(0, 10) : null;
           }
           return task;
         }),
-      }))
+      })),
     );
   };
- 
+
   render() {
     const { task, edit } = this.state;
-    let tasks = this.state.tasks.filter((task) =>
-      task.name.toLowerCase().includes(this.state.search)
+    const tasks = this.state.tasks.filter((task) =>
+      task.name.toLowerCase().includes(this.state.search),
     );
     return (
       <>
         {edit ? (
-          <EditTask
-            task={task}
-            onUpdate={this.handleUpdateTask}
-            cancel={this.cancelEdit}
-          />
+          <EditTask task={task} onUpdate={this.handleUpdateTask} cancel={this.cancelEdit} />
         ) : (
           <>
             <AddTask addTask={this.addTask} search={this.handleSearch} />
