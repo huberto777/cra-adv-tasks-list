@@ -1,5 +1,5 @@
-import React from "react";
-import TaskTableRow from "./TaskTableRow";
+import React from 'react';
+import TaskTableRow from './TaskTableRow';
 
 const TaskTable = (props) => {
   return (

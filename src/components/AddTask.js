@@ -1,104 +1,78 @@
-import React, { Component } from "react";
-import SearchTask from "./SearchTask";
-import { v4 as uuidv4 } from 'uuid';
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import React from 'react';
+import { useFormik } from 'formik';
+import SearchTask from './SearchTask';
 
-class AddTask extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: "",
-      priority: false,
-      date: this.minDate,
-    };
+const validate = (values) => {
+  const errors = {};
+  if (!values.name) {
+    errors.name = 'Required';
+  } else if (values.name.length > 50) {
+    errors.name = 'Must be 50 characters or less';
+  } else if (values.name.length < 3) {
+    errors.name = 'Must have min. 3 characters';
   }
-  minDate = new Date().toISOString().slice(0, 10);
-  handleName = (e) => {
-    this.setState({
-      name: e.target.value,
-    });
-  };
-  handleInput = (e) => {
-    if (e.target.type === "checkbox") {
-      this.setState({
-        priority: e.target.checked,
-      });
-    }
-    if (e.target.type === "text") {
-      this.setState({
-        name: e.target.value,
-      });
-      // console.log(e.target.value);
-    }
-    // if (e.target.type === "date") {
-    //   this.setState({
-    //     date: e.target.value,
-    //   });
-    // }
-  };
 
-  handleClick = () => {
-    const { name, priority, date } = this.state;
-    if (name.length < 3) return alert("task must have min. 3 characters");
-    // if (date < this.minDate) return alert("niewłaściwa data");
-    this.props.addTask({id: uuidv4(), name, priority, date, done: false, finishDate: null }); 
-    this.setState({
-      name: "",
+  return errors;
+};
+
+const minDate = new Date().toISOString().slice(0, 10);
+const AddTask = ({ addTask, search }) => {
+  const formik = useFormik({
+    initialValues: {
+      name: '',
       priority: false,
-    });
-  };
-
-  render() {
-    // let maxDate = this.minDate.slice(0, 4) * 1 + 1;
-    // maxDate = maxDate + "-12-31";
-    // console.log(maxDate);
-    return (
-      <div className="jumbotron bg-dark text-white">
-        <div className="form-row">
-          <div className="form-group col-md-4 mb-4">
-            <input
-              type="text"
-              placeholder="add task"
-              className="form-control"
-              value={this.state.name}
-              onChange={this.handleInput}
-            />
-          </div>
-          {/* <div className="form-group col-md-4">
-            <input
-              type="date"
-              className="form-control"
-              value={this.state.date}
-              onChange={this.handleInput}
-              min={this.minDate}
-              max={maxDate}
-            />
-          </div> */}
-          <div className="form-group col-md-2">
-            <div className="form-check">
-              <input
-                type="checkbox"
-                className="form-check-input"
-                id="check1"
-                checked={this.state.priority}
-                onChange={this.handleInput}
-              />
-              <label className="form-check-label " htmlFor="check1">
-                priority task
-              </label>
-            </div>
-          </div>
-          <div className="form-group col-md-2">
-            <button
-              className="btn btn-block btn-outline-warning"
-              onClick={this.handleClick}
-            >
-              add
-            </button>
-          </div>
-          <SearchTask search={this.props.search} />
+      date: minDate,
+      done: false,
+      finishDate: null,
+    },
+    validate,
+    onSubmit: (values, { resetForm }) => {
+      addTask(values);
+      resetForm();
+    },
+  });
+  return (
+    <div className="jumbotron bg-dark text-white">
+      <div className="form-row">
+        <div className="form-group col-md-4 mb-4">
+          <input
+            name="name"
+            type="text"
+            placeholder="add task"
+            className="form-control"
+            onChange={formik.handleChange}
+            value={formik.values.name}
+          />
         </div>
+        <div className="form-group col-md-2">
+          <div className="form-check">
+            <input
+              name="priority"
+              type="checkbox"
+              className="form-check-input"
+              checked={formik.values.priority}
+              onChange={formik.handleChange}
+            />
+            <label className="form-check-label" htmlFor="priority">
+              priority
+            </label>
+          </div>
+        </div>
+        <div className="form-group col-md-2">
+          <button
+            type="submit"
+            className="btn btn-block btn-outline-warning"
+            onClick={formik.handleSubmit}
+          >
+            add
+          </button>
+        </div>
+        <SearchTask search={search} />
       </div>
-    );
-  }
-}
+      {formik.errors.name ? <div className="text text-danger">{formik.errors.name}</div> : null}
+    </div>
+  );
+};
+
 export default AddTask;

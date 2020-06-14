@@ -1,15 +1,15 @@
-import React from "react";
+import React from 'react';
 
 const TaskTableRow = (props) => {
   const { name, done, finishDate, priority, date } = props.task;
 
-  let style = {};
+  const style = {};
   if (done) {
-    style.textDecoration = "line-through";
-    style.backgroundColor = "orange";
+    style.textDecoration = 'line-through';
+    style.backgroundColor = 'orange';
   }
   if (priority) {
-    style.color = "red";
+    style.color = 'red';
   }
   return (
     <tr style={style}>
@@ -19,7 +19,7 @@ const TaskTableRow = (props) => {
       <td>{finishDate}</td>
       <td>
         <button
-          className={done ? "inactive" : "btn btn-sm btn-outline-primary"}
+          className={done ? 'inactive' : 'btn btn-sm btn-outline-primary'}
           onClick={props.onDone}
           disabled={done}
         >
@@ -28,7 +28,7 @@ const TaskTableRow = (props) => {
       </td>
       <td>
         <button
-          className={done ? "inactive" : "btn btn-sm btn-outline-secondary"}
+          className={done ? 'inactive' : 'btn btn-sm btn-outline-secondary'}
           onClick={props.onEdit}
           disabled={done}
         >
@@ -36,10 +36,7 @@ const TaskTableRow = (props) => {
         </button>
       </td>
       <td>
-        <button
-          className="btn btn-sm btn-outline-danger"
-          onClick={props.onDelete}
-        >
+        <button className="btn btn-sm btn-outline-danger" onClick={props.onDelete}>
           delete
         </button>
       </td>
