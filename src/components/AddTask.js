@@ -1,29 +1,32 @@
-import React, { Component } from "react";
-import SearchTask from "./SearchTask";
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable no-undef */
+import React, { Component } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import SearchTask from './SearchTask';
 
 class AddTask extends Component {
+  minDate = new Date().toISOString().slice(0, 10);
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
+      name: '',
       priority: false,
       date: this.minDate,
     };
   }
-  minDate = new Date().toISOString().slice(0, 10);
+
   handleName = (e) => {
     this.setState({
       name: e.target.value,
     });
   };
   handleInput = (e) => {
-    if (e.target.type === "checkbox") {
+    if (e.target.type === 'checkbox') {
       this.setState({
         priority: e.target.checked,
       });
     }
-    if (e.target.type === "text") {
+    if (e.target.type === 'text') {
       this.setState({
         name: e.target.value,
       });
@@ -38,11 +41,10 @@ class AddTask extends Component {
 
   handleClick = () => {
     const { name, priority, date } = this.state;
-    if (name.length < 3) return alert("task must have min. 3 characters");
-    // if (date < this.minDate) return alert("niewłaściwa data");
-    this.props.addTask({id: uuidv4(), name, priority, date, done: false, finishDate: null }); 
+    if (name.length < 3) return alert('task must have min. 3 characters');
+    this.props.addTask({ id: uuidv4(), name, priority, date, done: false, finishDate: null });
     this.setState({
-      name: "",
+      name: '',
       priority: false,
     });
   };
@@ -63,16 +65,6 @@ class AddTask extends Component {
               onChange={this.handleInput}
             />
           </div>
-          {/* <div className="form-group col-md-4">
-            <input
-              type="date"
-              className="form-control"
-              value={this.state.date}
-              onChange={this.handleInput}
-              min={this.minDate}
-              max={maxDate}
-            />
-          </div> */}
           <div className="form-group col-md-2">
             <div className="form-check">
               <input
@@ -82,13 +74,14 @@ class AddTask extends Component {
                 checked={this.state.priority}
                 onChange={this.handleInput}
               />
-              <label className="form-check-label " htmlFor="check1">
+              <label className="form-check-label" htmlFor="check1">
                 priority task
               </label>
             </div>
           </div>
           <div className="form-group col-md-2">
             <button
+              type="submit"
               className="btn btn-block btn-outline-warning"
               onClick={this.handleClick}
             >

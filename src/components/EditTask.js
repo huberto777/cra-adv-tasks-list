@@ -1,16 +1,16 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 class EditTask extends Component {
   state = {
     name: this.props.task.name,
   };
   handleInput = (e) => {
-    if (e.target.type === "text") {
+    if (e.target.type === 'text') {
       this.setState({
         name: e.target.value,
       });
     }
-    if (e.target.type === "checkbox") {
+    if (e.target.type === 'checkbox') {
       this.setState({
         priority: e.target.value,
       });
@@ -37,6 +37,7 @@ class EditTask extends Component {
           </div>
           <div className="form-group col-md-2">
             <button
+              type="submit"
               className="btn btn-block btn-outline-warning"
               onClick={this.handleUpdate}
             >
@@ -45,6 +46,7 @@ class EditTask extends Component {
           </div>
           <div className="form-group col-md-2">
             <button
+              type="button"
               className="btn btn-block btn-outline-danger"
               onClick={this.props.cancel}
             >

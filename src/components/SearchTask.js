@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-const SearchTask = props => {
+const SearchTask = (props) => {
   return (
     <div className="form-group  col-md-4">
       <input

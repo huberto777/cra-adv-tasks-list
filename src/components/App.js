@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import AddTask from './AddTask';
-import TaskTable from './TaskTable';
 import EditTask from './EditTask';
 import FetchTasksAPI from './api/FetchTasksApi';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ErrorBoundary from './ErrorBoundary';
+
+const TaskTable = React.lazy(() => import('./TaskTable'));
 
 class App extends Component {
   constructor(props) {
@@ -83,21 +85,23 @@ class App extends Component {
       task.name.toLowerCase().includes(this.state.search),
     );
     return (
-      <>
-        {edit ? (
-          <EditTask task={task} onUpdate={this.handleUpdateTask} cancel={this.cancelEdit} />
-        ) : (
-          <>
-            <AddTask addTask={this.addTask} search={this.handleSearch} />
-            <TaskTable
-              tasks={tasks}
-              onDelete={this.handleDeleteTask}
-              onDone={this.handleDoneTask}
-              onEdit={this.handleEditTask}
-            />
-          </>
-        )}
-      </>
+      <ErrorBoundary message="coś nie działa w całej aplikacji...">
+        <React.Suspense fallback="... Loading">
+          {edit ? (
+            <EditTask task={task} onUpdate={this.handleUpdateTask} cancel={this.cancelEdit} />
+          ) : (
+            <>
+              <AddTask addTask={this.addTask} search={this.handleSearch} />
+              <TaskTable
+                tasks={tasks}
+                onDelete={this.handleDeleteTask}
+                onDone={this.handleDoneTask}
+                onEdit={this.handleEditTask}
+              />
+            </>
+          )}
+        </React.Suspense>
+      </ErrorBoundary>
     );
   }
 }
